@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:Homework7"
+             x:Class="Homework7.MainPage">
+
+    <StackLayout>
+        <StackLayout.BindingContext>
+            <local:PersonalityViewModel />
+        </StackLayout.BindingContext>
+
+
+        <Label Text="Name"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               IsVisible="{Binding FirstVisible}" />
+        <Entry Placeholder="Name"
+               IsVisible="{Binding FirstVisible}" />
+        <Label Text="Age"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               IsVisible="{Binding FirstVisible}" />
+        <Entry Placeholder="Age"
+               IsVisible="{Binding FirstVisible}" />
+        <Button Text="Next"
+                Command="{Binding FirstBtnCommand}"
+                IsVisible="{Binding FirstVisible}" />
+        
+        <Label Text="Do you like to party?" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand"
+                IsVisible="{Binding SecondVisible}" />
+        <Button Text="Next"
+                Command="{Binding SecondBtnCommand}"
+                IsVisible="{Binding SecondVisible}" />
+
+        <Label Text="Would you rather stay home?" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand"
+                IsVisible="{Binding ThirdVisible}" />
+        <Button Text="Next"
+                Command="{Binding ThirdBtnCommand}"
+                IsVisible="{Binding ThirdVisible}" />
+        <Label Text="Is your idea the best?" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand"
+                IsVisible="{Binding FourthVisible}" />
+        <Button Text="Next"
+                Command="{Binding FourthBtnCommand}"
+                IsVisible="{Binding FourthVisible}" />
+        <Label Text="Do you like to be the Leader?" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand"
+                IsVisible="{Binding FifthVisible}" />
+        <Button Text="Next"
+                Command="{Binding FifthBtnCommand}"
+                IsVisible="{Binding FifthVisible}" />
+        <Label Text="Would you rather blend into the crowd?" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand"
+                IsVisible="{Binding SixthVisible}" />
+        <Button Text="Next"
+                Command="{Binding SixthBtnCommand}"
+                IsVisible="{Binding SixthVisible}" />
+    </StackLayout>
+
+</ContentPage>
