@@ -12,15 +12,16 @@ namespace Homework7
         public string name;
         public int age;
 
-        public string text = "";
-        public bool firstVisible = true;
-        public bool secondVisible = false;
-        public bool thirdVisible = false;
-        public bool fourthVisible = false;
-        public bool fifthVisible = false;
-        public bool sixthVisible = false;
+        public bool questionVisible = true;
+        public bool resultsVisible = false;
 
-        public string[] character = { "Kylo", "Luke", "Han", "Vadar", "Yoda" };
+        public string characterName = "Error";
+
+        public int count = 0;
+        public int question = 0;
+
+        public string[] character = { "Kylo", "Luke", "Han", "Vadar", "Yoda"};
+        public string[] questions = { "Do you like to party?", "Would you rather stay home?", "Is your idea the best?", "Do you like to be the Leader?", "Would you rather blend into the crowd?" };
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -31,97 +32,62 @@ namespace Homework7
 
         public PersonalityViewModel()
         {
-            FirstBtnCommand = new Command(() =>
+            YesBtnCommand = new Command(() =>
             {
-                firstVisible = false;
-                secondVisible = true;
-                OnPropertyChanged("FirstVisible");
-                OnPropertyChanged("SecondVisible");
-            });
-            SecondBtnCommand = new Command(() =>
-            {
-                secondVisible = false;
-                thirdVisible = true;
-                OnPropertyChanged("SecondVisible");
-                OnPropertyChanged("ThirdVisible");
-            });
-            ThirdBtnCommand = new Command(() =>
-            {
-                thirdVisible = false;
-                fourthVisible = true;
-                OnPropertyChanged("ThirdVisible");
-                OnPropertyChanged("FourthVisible");
-            });
-            FourthBtnCommand = new Command(() =>
-            {
-                fourthVisible = false;
-                fifthVisible = true;
-                OnPropertyChanged("FourthVisible");
-                OnPropertyChanged("FifthVisible");
-            });
-            FifthBtnCommand = new Command(() =>
-            {
-                fifthVisible = false;
-                sixthVisible = true;
-                OnPropertyChanged("FifthVisible");
-                OnPropertyChanged("SixthVisible");
-            });
-            SixthBtnCommand = new Command(() =>
-            {
-                sixthVisible = false;
-                firstVisible = true;
-                OnPropertyChanged("SixthVisible");
-                OnPropertyChanged("FirstVisible");
-            });
-        }
-
-        public string Name
-        {
-            set
-            {
-                if (name != value)
+                if (question < 4)
                 {
-                    name = value;
-
-                    OnPropertyChanged("Name");
+                    count++;
+                    
+                    OnPropertyChanged("LabelText");
+                    
+                    question++;
+                    
                 }
-            }
-            get
-            {
-                return name;
-            }
-        }
-
-        public int Age
-        {
-            set
-            {
-                if (age != value)
+                else
                 {
-                    age = value;
-
-                    OnPropertyChanged("Age");
+                    questionVisible = false;
+                    resultsVisible = true;
+                    OnPropertyChanged("QuestionVisible");
+                    OnPropertyChanged("ResultsVisible");
+                    OnPropertyChanged("CharacterName");
                 }
-            }
-            get
+            });
+            NoBtnCommand = new Command(() =>
             {
-                return age;
-            }
+                if (question < 4)
+                {
+                    
+                    OnPropertyChanged("LabelText");
+                    question++;
+                }
+                else
+                {
+                    questionVisible = false;
+                    resultsVisible = true;
+                    OnPropertyChanged("QuestionVisible");
+                    OnPropertyChanged("ResultsVisible");
+                    OnPropertyChanged("CharacterName");
+                }
+            });
+            ResultsBtnCommand = new Command(() =>
+            {
+                questionVisible = true;
+                resultsVisible = false;
+                count = 0;
+                question = 0;
+                OnPropertyChanged("QuestionVisible");
+                OnPropertyChanged("ResultsVisible");
+            });
         }
 
-        public bool FirstVisible { get { return firstVisible; } }
-        public bool SecondVisible { get { return secondVisible; } }
-        public bool ThirdVisible { get { return thirdVisible; } }
-        public bool FourthVisible { get { return fourthVisible; } }
-        public bool FifthVisible { get { return fifthVisible; } }
-        public bool SixthVisible { get { return sixthVisible; } }
+        public bool QuestionVisible { get { return questionVisible; } }
+        public bool ResultsVisible { get { return resultsVisible; } }
+        public string LabelText { get { return questions[question]; } }
+        public string CharacterName { get { return character[count]; } }
 
 
-        public ICommand FirstBtnCommand { get; private set; }
-        public ICommand SecondBtnCommand { get; private set; }
-        public ICommand ThirdBtnCommand { get; private set; }
-        public ICommand FourthBtnCommand { get; private set; }
-        public ICommand FifthBtnCommand { get; private set; }
-        public ICommand SixthBtnCommand { get; private set; }
+        public ICommand YesBtnCommand { get; private set; }
+        public ICommand NoBtnCommand { get; private set; }
+        public ICommand ResultsBtnCommand { get; private set; }
     }
 }
